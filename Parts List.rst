@@ -1,145 +1,66 @@
 Build Process
 =============
 
-Files: `tasks.py`_ - `doc_builder/`_
-
-.. _tasks.py: https://github.com/rtfd/readthedocs.org/blob/master/readthedocs/projects/tasks.py
-.. _doc_builder/: https://github.com/rtfd/readthedocs.org/tree/master/readthedocs/doc_builder
-
-Every documentation build has limited resources.
-Our current build limits are:
-
-* 15 minutes
-* 1GB of memory
-
-We can increase build limits on a per-project basis,
-if you provide a good reason your documentation needs more resources.
-
-You can see the current Docker build images that we use in our `docker repository <https://github.com/rtfd/readthedocs-docker-images>`_. `Docker Hub <https://hub.docker.com/r/readthedocs/build/>`_ also shows the latest set of images that have been built.
-
-Currently in production we're using the ``readthedocs/build:2.0`` docker image as our default image.
-
-How we build documentation
+Raspberry Pi 3 Model B
 --------------------------
 
-When we import your documentation, we look at two things first: your *Repository URL* and the *Documentation Type*.
-We will clone your repository,
-and then build your documentation using the *Documentation Type* specified.
+*$30* at http://www.microcenter.com/
 
-Sphinx
-~~~~~~
+A Raspberry Pi 3 is the computer that runs TJBot (together with Watson on the cloud). I bought mine from microcenter.
 
-When you choose *Sphinx* as your *Documentation Type*,
-we will first look for a ``conf.py`` file in your repository.
-If we don't find one,
-we will generate one for you.
-We will look inside a ``doc`` or ``docs`` directory first,
-and then look within your entire project.
+Raspberry Pi Camera Board v2
+--------------------------
 
-Then Sphinx will build any files with an ``.rst`` extension.
-If you have a ``README.rst``,
-it will be transformed into an ``index.rst`` automatically.
+*$20* -  https://www.aliexpress.com/item/New-Arrival-Raspberry-pi-Camera-V2-Module-Board-8MP-Webcam-Video-1080p-720p-Official-camera-For/32667002402.html
 
-Mkdocs
-~~~~~~
+Micro Servo
+--------------------------
 
-When you choose *Mkdocs* as your *Documentation Type*,
-we will first look for a ``mkdocs.yml`` file in your repository.
-If we don't find one,
-we will generate one for you.
-We will look inside a ``doc`` or ``docs`` directory first,
-and then default to the top-level of your documentation.
+*$1.38* - https://www.aliexpress.com/item/TowerPro-SG90-9G-Micro-Small-Servo-Motor-RC-Robot-Helicopter-Airplane-Controls/32510297391.html
 
-Then Mkdocs will build any files with an ``.md`` extension.
-If you have a ``README.md``,
-it will be transformed into an ``index.md`` automatically.
-As MkDocs doesn't support automatic PDF generation,
-Read the Docs cannot create a PDF version of your documentation with the *Mkdocs* option.
+Mini USB Microphone
+--------------------------
 
-Understanding what's going on
------------------------------
+*$1.38* - https://www.aliexpress.com/item/Newest-Super-Mini-USB-2-0-Microphone-MIC-Audio-Adapter-Driver-Free-for-MSN-PC-Notebook/32721157915.html
 
-Understanding how Read the Docs builds your project will help you with debugging the problems you have with the site. It should also allow you to take advantage of certain things that happen during the build process.
+Mini External USB Stereo Speaker
+--------------------------
 
-The first step of the process is that we check out your code from the repository you have given us. If the code is already checked out, we update the copy to the branch that you have specified in your projects configuration.
+$1.40 Speaker connector: Instead of a USB speaker, I ordered this part to allow me to plug in one of my existing speakers through the USB connector on the Pi from Alisexpress  I read in there somewhere that a USB speaker is better than using the 3.5mm jack on the Pi because with the Pi's audio jack you might get distortion.
 
-Then we build the proper backend code for the type of documentation you've selected.
+Female/Female Jumper Wires - 20 x 3"
+--------------------------
 
-If you have the *Install Project* option enabled, we will run ``setup.py install`` on your package, installing it into a virtual environment. You can also define additional packages to install with the *Requirements File* option.
+*$3* -  https://www.aliexpress.com/item/Free-shipping-Dupont-line-120pcs-20cm-male-to-male-male-to-female-and-female-to-female/32501238474.html
 
-When we build your documentation, we run `sphinx-build -b html . _build/html`, where `html` would be replaced with the correct backend. We also create man pages and pdf's automatically based on your project.
+Jumper wires (see the parts list referenced above) : I have a bunch laying around that I bought from Aliexpress. For example, here are a bunch for just a few dollars at Aliexpress. (Aliexpress is like amazon or ebay ordering direct from China. You need to wait a long time, like a month, for things to come)
 
-Then these files are copied across to our application servers from the build server. Once on the application servers, they are served from nginx. 
+Female/Male 'Extension' Jumper Wires - 20 x 3"
+--------------------------
 
-An example in code:
+5V 2.4A Switching Power Supply
+--------------------------
 
-.. code-block:: python
+??
 
-    update_imported_docs(version)
-    if exists('setup.py'):
-        run('python setup.py install')
-    if project.requirements_file:
-        run('pip install -r %s' % project.requirements_file)
-    build_docs(version=version)
-    copy_files(artifact_dir)
-    
+NeoPixel Diffused 8mm Through-Hole LED - 5 Pack
+--------------------------
 
-Builder Responsibility
-----------------------
+*$10*  - https://www.adafruit.com/product/1734
 
-Builders have a very specific job.
-They take the updated source code and generate the correct artifacts.
-The code lives in ``self.version.project.checkout_path(self.version.slug)``.
-The artifacts should end up in ``self.version.project.artifact_path(version=self.version.slug, type=self.type)``
-Where ``type`` is the name of your builder.
-All files that end up in the artifact directory should be in their final form.
+I found mine for less by shopping around. You can find them on Amazon and ebay.  Shipping is expensive. Note: you can't use any old LED if you want it to work with the TJBot software without modification, it must be a neopixel LED and must be "through hole" which is a little more difficult to find and more expensive. You may even be able to get it from microcenter (mentioned above)
 
-Packages installed in the build environment
--------------------------------------------
 
-The build server does have a select number of C libraries installed, because they are used across a wide array of python projects. We can't install every C library out there, but we try and support the major ones. We currently have the following libraries installed:
+16GB Card with NOOBS 2.1
+--------------------------
 
-    * doxygen
-    * LaTeX (texlive-full)
-    * libevent (libevent-dev)
-    * dvipng
-    * graphviz
-    * libxslt1.1
-    * libxml2-dev
+A Micro-SD card - I'm using a PNY 8gb class 10 card that I found at Walmart on clearance. The chart on this page (http://elinux.org/RPi_SD_cards) tells which cards work best with the Pi3. The parts list calls for 16gb, but I'm using an 8gb card.
 
-Writing your own builder
-------------------------
+Noobs is available for download here.I just use my laptop to copy files onto the micro-sd card for the Pi.
 
-.. note:: Builds happen on a server using only the RTD Public API. There is no reason that you couldn't build your own independent builder that wrote into the RTD namespace. The only thing that is currently unsupported there is a saner way than uploading the processed files as a zip.
+TJBot Chipboard and frame
+--------------------------
 
-The documentation build system in RTD is made pluggable, so that you can build out your own backend. If you have a documentation format that isn't currently supported, you can add support by contributing a backend.
+*$30 (including shipping)* at http://texlaser.com/
 
-The :doc:`api/doc_builder` API explains the higher level parts of the API that you need to implement. A basic run goes something like this::
-
-    backend = get_backend(project.documentation_type)
-    if force:
-        backend.force(version)
-    backend.clean(version)
-    backend.build(version)
-    if success:
-        backend.move(version)
-
-Deleting a stale or broken build environment
---------------------------------------------
-
-If you're having trouble getting your version to build, try wiping out the existing build/environment files.  On your version list page ``/projects/[project]/versions`` there is a "Wipe" button that will remove all of the files associated with your documentation build, but not the documentation itself.
-
-Build environment
------------------
-
-The *Sphinx* and *Mkdocs* builders set the following RTD-specific environment variables when building your documentation:
-
-+-------------------------+--------------------------------------------------+----------------------+
-| Environment variable    | Description                                      | Example value        |
-+-------------------------+--------------------------------------------------+----------------------+
-| ``READTHEDOCS``         | Whether the build is running inside RTD          | ``True``             |
-+-------------------------+--------------------------------------------------+----------------------+
-| ``READTHEDOCS_VERSION`` | The RTD name of the version which is being built | ``latest``           |
-+-------------------------+--------------------------------------------------+----------------------+
-| ``READTHEDOCS_PROJECT`` | The RTD name of the project which is being built | ``myexampleproject`` |
-+-------------------------+--------------------------------------------------+----------------------+
+For the TJBot "Body" I decided to order a laser cut "cardboard" (It's actually a very thick cardboard almost like a child's board book). from Texaslaser.
