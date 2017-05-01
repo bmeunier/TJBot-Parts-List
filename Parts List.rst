@@ -1,4 +1,4 @@
-Build Process
+Parts List
 =============
 
 Raspberry Pi 3 Model B
