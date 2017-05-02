@@ -19,7 +19,9 @@ Micro Servo
 Mini USB Microphone
 --------------------------
 
-*$1.38* - https://www.aliexpress.com/item/Newest-Super-Mini-USB-2-0-Microphone-MIC-Audio-Adapter-Driver-Free-for-MSN-PC-Notebook/32721157915.html
+* Mini USB Microphone *$1.38* - https://www.aliexpress.com/item/Newest-Super-Mini-USB-2-0-Microphone-MIC-Audio-Adapter-Driver-Free-for-MSN-PC-Notebook/32721157915.html
+* USB Digital Wireless System *100$* - https://www.amazon.com/gp/product/B014803CMK/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1
+
 
 Mini External USB Stereo Speaker
 --------------------------
