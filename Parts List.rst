@@ -16,7 +16,7 @@ Micro Servo
 
 *$1.38* - https://www.aliexpress.com/item/TowerPro-SG90-9G-Micro-Small-Servo-Motor-RC-Robot-Helicopter-Airplane-Controls/32510297391.html
 
-Mini USB Microphone
+Microphone
 --------------------------
 
 * Mini USB Microphone *$1.38* - https://www.aliexpress.com/item/Newest-Super-Mini-USB-2-0-Microphone-MIC-Audio-Adapter-Driver-Free-for-MSN-PC-Notebook/32721157915.html
